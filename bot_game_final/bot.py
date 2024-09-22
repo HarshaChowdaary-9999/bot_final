@@ -10,10 +10,10 @@ def calculate_up(grid,depth):
     for i in range(0,4):    
       for j in range(0,4):        
           if(temp_up[i][j] == 0):            
-              for y_temp in range(j+1,4):
-                  if(temp_up[i][y_temp]):                    
-                      temp_up[i][j] = temp_up[i][y_temp]
-                      temp_up[i][y_temp] = 0
+              for j_temp in range(j+1,4):
+                  if(temp_up[i][j_temp]):                    
+                      temp_up[i][j] = temp_up[i][j_temp]
+                      temp_up[i][j_temp] = 0
                       
                       break
       for j in range(0,3):        
@@ -21,8 +21,8 @@ def calculate_up(grid,depth):
               temp_up[i][j] *= 2
               temp_score += temp_up[i][j]
               print('up check',temp_score)
-              for y_temp in range(j+1,3):
-                  temp_up[i][y_temp] = temp_up[i][y_temp+1]
+              for j_temp in range(j+1,3):
+                  temp_up[i][j_temp] = temp_up[i][j_temp+1]
 
               temp_up[i][3] = 0
     depth=depth-1
@@ -35,18 +35,18 @@ def calculate_down(grid,depth):
     for i in range(0,4):    
       for j in range(3,-1,-1):        
           if(grid[i][j] == 0):              
-              for y_temp in range(j-1,-1,-1):
-                  if(grid[i][y_temp]):                      
-                      grid[i][j] = grid[i][y_temp]
-                      grid[i][y_temp] = 0                      
+              for j_temp in range(j-1,-1,-1):
+                  if(grid[i][j_temp]):                      
+                      grid[i][j] = grid[i][j_temp]
+                      grid[i][j_temp] = 0                      
                       break 
       for j in range(3,0,-1):          
           if(grid[i][j] == grid[i][j-1] and grid[i][j] != 0):               
               grid[i][j] *= 2
               temp_score += grid[i][j]
               legal_move = 1
-              for y_temp in range(j-1,0,-1):
-                  grid[i][y_temp] = grid[i][y_temp-1]
+              for j_temp in range(j-1,0,-1):
+                  grid[i][j_temp] = grid[i][j_temp-1]
               grid[i][0] = 0
     depth=depth-1
   print('cal down:',temp_score)
@@ -57,18 +57,18 @@ def calculate_right(grid,depth):
     for i in range(0,4):    
       for j in range(3,-1,-1):        
           if(grid[j][i] == 0):              
-              for x_temp in range(j-1,-1,-1):
-                  if(grid[x_temp][i]):                      
-                      grid[j][i] = grid[x_temp][i]
-                      grid[x_temp][i] = 0                      
+              for i_temp in range(j-1,-1,-1):
+                  if(grid[i_temp][i]):                      
+                      grid[j][i] = grid[i_temp][i]
+                      grid[i_temp][i] = 0                      
                       break 
       for j in range(3,0,-1):          
           if(grid[j][i] == grid[j-1][i] and grid[j][i] != 0):               
               grid[j][i] *= 2
               temp_score += grid[j][i]
               legal_move = 1
-              for x_temp in range(j-1,0,-1):
-                  grid[x_temp][i] = grid[x_temp-1][i]
+              for i_temp in range(j-1,0,-1):
+                  grid[i_temp][i] = grid[i_temp-1][i]
 
               grid[0][i] = 0
     depth=depth-1 
@@ -78,20 +78,20 @@ def calculate_left(grid,depth):
   temp_score=0
   while depth>0:
     for i in range(0,4):    
-      for x_ind in range(0,4):        
-          if(grid[x_ind][i] == 0):              
-              for x_temp in range(x_ind+1,4):
-                  if(grid[x_temp][i]):                      
-                      grid[x_ind][i] = grid[x_temp][i]
-                      grid[x_temp][i] = 0                      
+      for j in range(0,4):        
+          if(grid[j][i] == 0):              
+              for i_temp in range(j+1,4):
+                  if(grid[i_temp][i]):                      
+                      grid[j][i] = grid[i_temp][i]
+                      grid[i_temp][i] = 0                      
                       break                
-      for x_ind in range(0,3):          
-          if(grid[x_ind][i] == grid[x_ind+1][i] and grid[x_ind][i] != 0):               
-              grid[x_ind][i] *= 2
-              temp_score += grid[x_ind][i]
+      for j in range(0,3):          
+          if(grid[j][i] == grid[j+1][i] and grid[j][i] != 0):               
+              grid[j][i] *= 2
+              temp_score += grid[j][i]
               legal_move = 1
-              for x_temp in range(x_ind+1,3):
-                  grid[x_temp][i] = grid[x_temp+1][i]
+              for i_temp in range(j+1,3):
+                  grid[i_temp][i] = grid[i_temp+1][i]
               grid[3][i] = 0
     depth=depth-1
   print('cal left :',temp_score)  
